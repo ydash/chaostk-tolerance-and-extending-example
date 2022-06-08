@@ -1,0 +1,49 @@
+{
+    "title": "torelanceプロパティでPythonモジュールを呼び出す",
+    "description": "自作のadderモジュールを作成しこの実験のtorelanceプロパティで呼び出す",
+    "steady-state-hypothesis": {
+        "title": "Chaos Toolkit拡張方法とtoleranceの調査",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "任意のpythonモジュール呼び出し",
+                "tolerance": 5,
+                "provider": {
+                    "type": "python",
+                    "module": "adder",
+                    "func": "add",
+                    "arguments": {
+                        "n": 1,
+                        "m": 4
+                    }
+                }
+         
+            },
+            {
+                "type":"probe",
+                "name":"シェル実行",
+                "tolerance": {
+                    "type": "jsonpath",
+                    "path": "$.add",
+                    "target": "stdout",
+                    "expect": 8
+                },
+                "provider": {
+                    "type": "process",
+                    "path": "./adder.sh",
+                    "arguments": "3 5"
+                }
+            },
+            {
+                "type":"probe",
+                "name":"バイナリファイル実行",
+                "tolerance": 1,
+                "provider":{
+                    "type":"process",
+                    "path":"./error"
+                }
+            }
+        ]
+    },
+    "method": []
+}

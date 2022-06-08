@@ -1,0 +1,6 @@
+# python module
+__pycache__
+
+## chaos toolkit
+chaostoolkit.log
+journal.json
